@@ -1,0 +1,163 @@
+import styled from "styled-components";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const ContactForm = () => {
+  const initialValues = {
+    name: "",
+    email: "",
+    message: "",
+  };
+  const onSubmit = (values) => {
+    console.log("Form data", values);
+  };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email format!").required("Required"),
+    message: Yup.string().required("Required"),
+  });
+
+  return (
+    <Wrapper>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        <Form>
+          <div>
+            <Field
+              className="input-field"
+              id="name"
+              name="name"
+              placeholder="Name"
+              type="text"
+            />
+            <ErrorMessage
+              className="error-message error-message-name"
+              name="name"
+              component="div"
+            />
+          </div>
+
+          <div>
+            <Field
+              className="input-field"
+              id="email"
+              name="email"
+              placeholder="Email"
+              type="email"
+            />
+            <ErrorMessage
+              className="error-message error-message-email"
+              name="email"
+              component="div"
+            />
+          </div>
+          <div>
+            <Field
+              className="input-field"
+              id="message"
+              name="message"
+              placeholder="Message"
+              as="textarea"
+            />
+            <ErrorMessage
+              className="error-message error-message-message"
+              name="message"
+              component="div"
+            />
+          </div>
+
+          <button type="submit">Send</button>
+        </Form>
+      </Formik>
+    </Wrapper>
+  );
+};
+
+export default ContactForm;
+
+const Wrapper = styled.div`
+  div {
+    position: relative;
+  }
+
+  input,
+  textarea {
+    margin-bottom: 2em;
+    padding-left: 1.3em;
+    display: block;
+    width: 100%;
+    outline: none;
+    height: 4em;
+    font-size: 1rem;
+    border: 1px solid var(--lightGray2);
+  }
+  textarea {
+    height: 10em;
+    resize: none;
+    font-family: var(--bodyFont);
+    padding-top: 1em;
+    padding-right: 1.3em;
+  }
+
+  .input-field::placeholder {
+    color: var(--lightGray);
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    outline: none;
+    background: var(--lightGray);
+    height: 4em;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all ease-in-out 0.3s;
+  }
+
+  button:focus,
+  button:hover {
+    background: var(--darkGray);
+  }
+
+  .error-message {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--darkGray);
+  }
+
+  .error-message-name,
+  .error-message-email {
+    top: 5em;
+  }
+  .error-message-message {
+    top: 11.5em;
+  }
+
+  @media (min-width: 697px) {
+    textarea {
+      height: 14em;
+    }
+
+    .error-message-message {
+      top: 16em;
+    }
+  }
+  @media (min-width: 1000px) {
+    textarea {
+      height: 16em;
+    }
+    .error-message-message {
+      top: 18em;
+    }
+  }
+`;
