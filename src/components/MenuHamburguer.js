@@ -59,7 +59,7 @@ const Wrapper = styled.div`
 
     .bar {
       width: 100%;
-      height: 0.2em;
+      height: 0.1em;
       background-color: var(--veryLightGray);
       transition: all 0.3s ease;
       z-index: 1;
