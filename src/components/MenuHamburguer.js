@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   @media (max-width: 697px) {
     .menu-container {
       position: absolute;
-      top: 2em;
+      top: 1.51em;
       right: 2em;
       cursor: pointer;
       width: 2em;

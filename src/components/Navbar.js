@@ -7,7 +7,7 @@ const Navbar = ({ colorScheme }) => {
   return (
     <Wrapper className={`${colorScheme}`}>
       <div className="nav-container">
-        <Link to="/">
+        <Link to="/" className="logo">
           <img src={Logo} alt="EVP Studio" />
         </Link>
 
@@ -70,8 +70,23 @@ const Wrapper = styled.nav`
   }
 
   @media (max-width: 697px) {
+    .nav-container {
+      padding-top: 0;
+      padding-bottom: 0;
+      height: 5em;
+    }
+
     .container-nav-items {
       display: none;
+    }
+
+    .nav-container .logo {
+      display: flex;
+      justify-content: center;
+    }
+
+    .nav-container img {
+      max-width: 200px;
     }
   }
 `;

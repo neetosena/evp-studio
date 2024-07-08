@@ -51,7 +51,7 @@ const Wrapper = styled.footer`
   position: relative;
   padding: 5em 0;
   background: var(--lightGray);
-  z-index: 2;
+  z-index: 1;
 
   .container-footer {
     max-width: 1000px;

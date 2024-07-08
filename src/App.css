@@ -46,3 +46,9 @@ p {
   line-height: 1.7;
   font-weight: 400;
 }
+
+@media (max-width: 697px) {
+  .gray {
+    height: 5em;
+  }
+}
