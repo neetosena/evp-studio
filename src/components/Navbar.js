@@ -7,9 +7,9 @@ const Navbar = ({ colorScheme }) => {
   return (
     <Wrapper className={`${colorScheme}`}>
       <div className="nav-container">
-        <Link to="/" className="logo">
+        <NavLink to="/" className="logo">
           <img src={Logo} alt="EVP Studio" />
-        </Link>
+        </NavLink>
 
         <MenuHamburguer />
 

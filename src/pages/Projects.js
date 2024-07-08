@@ -6,8 +6,12 @@ import Image1 from "../images/130-Sandyford-Road_DSC1692-1.jpg";
 import Image2 from "../images/Aragon-Killakee_DSC9413_Panorama 2-about.jpg";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
 
 const Projects = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <Wrapper>
       <Navbar colorScheme="gray" />

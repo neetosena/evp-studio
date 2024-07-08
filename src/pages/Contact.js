@@ -8,7 +8,12 @@ import Navbar from "../components/Navbar";
 import Title from "../components/Title";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
+
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <Wrapper>
       <Navbar colorScheme={"gray"} />

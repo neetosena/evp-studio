@@ -4,8 +4,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { testimonials } from "../utils/testimonials";
 import BackgroundLogo from "../images/logo_background.svg";
+import { useEffect } from "react";
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <Wrapper>
       <Navbar colorScheme={"gray"} />
