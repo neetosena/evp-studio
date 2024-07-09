@@ -218,7 +218,7 @@ const Wrapper = styled.div`
     left: 50%;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     transform: translate(-50%, -50%);
     z-index: 2;
   }
@@ -271,7 +271,7 @@ const Wrapper = styled.div`
 
     //style the div that contains the SlideShow Component
     .slideshow {
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.8);
     }
   }
 
