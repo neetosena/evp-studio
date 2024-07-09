@@ -8,8 +8,24 @@ const ContactForm = () => {
     email: "",
     message: "",
   };
-  const onSubmit = (values) => {
-    console.log("Form data", values);
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
+    // Use Netlify's form submissions endpoint
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(values).toString(),
+    })
+      .then(() => {
+        console.log("Form sucessfully submitted");
+        resetForm();
+        setSubmitting(false);
+        alert("Thank you for your message!");
+      })
+      .catch((error) => {
+        console.error("Form submission error: ", error);
+        setSubmitting(false);
+        alert("Something went wrong, please try again.");
+      });
   };
 
   const validationSchema = Yup.object({
@@ -25,7 +41,13 @@ const ContactForm = () => {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form>
+        <Form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="form-name" value="contact" />
           <div>
             <Field
               className="input-field"
