@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Logo from "../images/logo-evpstudio.svg";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import MenuHamburguer from "./MenuHamburguer";
 
 const Navbar = ({ colorScheme }) => {
