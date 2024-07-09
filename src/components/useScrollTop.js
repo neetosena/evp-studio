@@ -9,7 +9,7 @@ const useScrollTop = () => {
   useEffect(() => {
     console.log('Pathname changed to:', location.pathname);
     scrollToSection(location);
-  }, [location, scrollToSection]);
+  }, [location]);
   
   
   
