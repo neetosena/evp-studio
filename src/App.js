@@ -5,9 +5,9 @@ import { Home, About, Contact, Projects } from "./pages";
 import { useScrollTop } from "./components/useScrollTop";
 
 import ProjectPost from "./pages/ProjectPost";
-  useScrollTop();
-function App() {
   
+function App() {
+  useScrollTop();
   return (
     <BrowserRouter>
       <Routes>
