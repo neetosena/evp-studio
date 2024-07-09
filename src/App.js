@@ -2,13 +2,14 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, About, Contact, Projects } from "./pages";
 
-// import { scrollTo } from "./components/useGlobalContext"
+import { useGlobalContext } from "./components/context";
 // import useScrollTop from "./components/useScrollTop";
 
 import ProjectPost from "./pages/ProjectPost";
   
 function App() {
-  // useScrollTop();
+  const { scrollTo } = useGlobalContext();
+  scrollTo()
   
   return (
     <BrowserRouter>
