@@ -8,8 +8,8 @@ const useScrollTop = () => {
 
   useEffect(() => {
     console.log('Pathname changed to:', location.pathname);
-    window.scrollTo({top: 0, behavior: "smooth" })
-  }, [location, scrollToSection])
+    scrollToSection(location);
+  }, [location, scrollToSection]);
   
   
   
