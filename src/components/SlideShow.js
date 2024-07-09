@@ -118,4 +118,16 @@ const Wrapper = styled.div`
   .arrow-right::before {
     content: ">";
   }
+
+  @media (orientation: landscape) {
+    .slide-container-img {
+      max-height: 50vh;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .slide-container-img {
+      padding: 0 2em;
+    }
+  }
 `;

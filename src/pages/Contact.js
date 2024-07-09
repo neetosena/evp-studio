@@ -26,7 +26,11 @@ const Contact = () => {
           <Link className="contact-logo" to="/">
             <img src={Logo} alt="EVP Studio" />
           </Link>
-          <a href="#">
+          <a
+            href="https://www.google.com/maps/place/Oldcourt,+Dublin,+D24+HD76/@53.2703603,-6.3408206,16z/data=!3m1!4b1!4m6!3m5!1s0x48670b21e341cbf7:0x138ceac2614d4b4d!8m2!3d53.2703609!4d-6.3356708!16s%2Fg%2F11c1p893k4?entry=ttu"
+            target="_blank"
+            rel="noreferrer"
+          >
             16 Beechdale Road, Ballycullen, <br />
             Dublin, D24HD76
           </a>

@@ -49,6 +49,12 @@ const Wrapper = styled.nav`
     font-family: var(--headingFont);
     font-weight: 400;
   }
+
+  .logo:hover,
+  .logo:focus {
+    opacity: 0.5;
+  }
+
   .nav-container ul {
     list-style: none;
     display: flex;
