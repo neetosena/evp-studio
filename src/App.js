@@ -8,8 +8,8 @@ import { useGlobalContext } from "./components/context";
 import ProjectPost from "./pages/ProjectPost";
   
 function App() {
-  const { scrollTo } = useGlobalContext();
-  scrollTo()
+  const { scrollToSection } = useGlobalContext();
+  scrollToSection()
   
   return (
     <BrowserRouter>
