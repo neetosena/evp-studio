@@ -88,7 +88,7 @@ const Wrapper = styled.div`
       justify-content: center;
       align-items: center;
       text-align: center;
-      background: var(--lightGray);
+      background: var(--darkGray);
       transform: translate(100%, 0);
       transition: all 0.2s ease;
       z-index: 1;
