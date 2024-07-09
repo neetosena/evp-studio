@@ -268,6 +268,11 @@ const Wrapper = styled.div`
       margin-top: 9em;
       z-index: 0;
     }
+
+    //style the div that contains the SlideShow Component
+    .slideshow {
+      background: rgba(0, 0, 0, 0.9);
+    }
   }
 
   @media (min-width: 1000px) {

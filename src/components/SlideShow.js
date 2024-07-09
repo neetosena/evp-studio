@@ -76,7 +76,6 @@ const Wrapper = styled.div`
     position: absolute;
     top: 3em;
     right: 7em;
-
     color: white;
   }
 
@@ -121,13 +120,19 @@ const Wrapper = styled.div`
 
   @media (orientation: landscape) {
     .slide-container-img {
-      max-height: 50vh;
+      max-height: 45vh;
     }
   }
 
   @media (max-width: 860px) {
-    .slide-container-img {
-      padding: 0 2em;
+    .btn-close {
+      top: 0.7em;
+      right: 0.7em;
+    }
+
+    .title {
+      top: 1.8em;
+      right: 5em;
     }
   }
 `;
