@@ -59,6 +59,10 @@ const Wrapper = styled.footer`
     margin: 0 auto;
   }
 
+  .container-footer a:hover {
+    opacity: 0.5;
+  }
+
   .container-logo {
     display: block;
     padding-bottom: 1em;

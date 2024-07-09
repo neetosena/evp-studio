@@ -60,7 +60,7 @@ const Wrapper = styled.nav`
 
   .nav-container ul a:hover,
   .nav-container ul a:focus {
-    color: var(--darkGray);
+    opacity: 0.5;
   }
 
   @media (max-width: 754px) {

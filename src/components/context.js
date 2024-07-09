@@ -6,7 +6,8 @@ const AppProvider = ({ children }) => {
   const [index, setIndex] = useState(0);
 
   const scrollToSection = (location) => {
-    let elem = document.getElementById(location.hash.slice(1));
+    let hash = location.hash ? location.hash.slice(1) : null;
+    let elem = hash ? document.getElementById(hash) : null;
 
     if (elem) {
       elem.scrollIntoView({ behavior: "smooth" });
