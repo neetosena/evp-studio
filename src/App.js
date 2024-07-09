@@ -6,7 +6,7 @@ import useScrollTop from "./components/useScrollTop";
 import ProjectPost from "./pages/ProjectPost";
   
 function App() {
-  scrollToSection()
+  useScrollTop()
   
   return (
     <BrowserRouter>
