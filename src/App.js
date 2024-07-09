@@ -1,14 +1,11 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, About, Contact, Projects } from "./pages";
-
-import { useGlobalContext } from "./components/context";
-// import useScrollTop from "./components/useScrollTop";
+import useScrollTop from "./components/useScrollTop";
 
 import ProjectPost from "./pages/ProjectPost";
   
 function App() {
-  const { scrollToSection } = useGlobalContext();
   scrollToSection()
   
   return (
