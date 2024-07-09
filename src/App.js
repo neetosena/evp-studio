@@ -2,9 +2,12 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, About, Contact, Projects } from "./pages";
 
-import ProjectPost from "./pages/ProjectPost";
+import { useScrollTop } from "./components/useScrollTop";
 
+import ProjectPost from "./pages/ProjectPost";
+  useScrollTop();
 function App() {
+  
   return (
     <BrowserRouter>
       <Routes>
