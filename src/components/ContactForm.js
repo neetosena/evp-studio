@@ -36,7 +36,11 @@ const ContactForm = () => {
 
   return (
     <Wrapper>
-      <Formik initialValues={initialValues} validationSchema={validationSchema}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
         <Form
           name="contact"
           method="POST"
