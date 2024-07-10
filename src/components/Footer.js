@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <Wrapper>
       <div className="container-footer">
-        <Link className="container-logo" to="#">
+        <Link className="container-logo" to="/">
           <img src={Logo} alt="EVP Studio" />
         </Link>
         <div className="inner-footer">
