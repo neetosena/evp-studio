@@ -10,6 +10,13 @@ const ContactForm = () => {
   };
 
   const encode = (data) => {
+    console.log(
+      Object.keys(data)
+        .map(
+          (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
+        .join("&")
+    );
     return Object.keys(data).map(
       (key) =>
         encodeURIComponent(key) + "=" + encodeURIComponent(data[key]).join("&")
