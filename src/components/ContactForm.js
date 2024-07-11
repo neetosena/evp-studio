@@ -8,12 +8,19 @@ const ContactForm = () => {
     email: "",
     message: "",
   };
+
+  const encode = (data) => {
+    return Object.keys(data).map(
+      (key) =>
+        encodeURIComponent(key) + "=" + encodeURIComponent(data[key]).join("&")
+    );
+  };
   const onSubmit = (values, { setSubmitting, resetForm }) => {
     // Use Netlify's form submissions endpoint
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(values).toString(),
+      body: encode({ "form-name": "contact", ...values }),
     })
       .then(() => {
         console.log("Form sucessfully submitted");
