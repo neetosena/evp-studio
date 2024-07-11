@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const ContactForm = () => {
+  const navigate = useNavigate();
+
   const initialValues = {
     name: "",
     email: "",
@@ -34,7 +37,8 @@ const ContactForm = () => {
         console.log("Form sucessfully submitted");
         resetForm();
         setSubmitting(false);
-        alert("Thank you for your message!");
+        navigate("/thank-you");
+        // alert("Thank you for your message!");
       })
       .catch((error) => {
         console.error("Form submission error: ", error);
