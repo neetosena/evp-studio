@@ -17,10 +17,11 @@ const ContactForm = () => {
         )
         .join("&")
     );
-    return Object.keys(data).map(
-      (key) =>
-        encodeURIComponent(key) + "=" + encodeURIComponent(data[key]).join("&")
-    );
+    return Object.keys(data)
+      .map(
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      )
+      .join("&");
   };
   const onSubmit = (values, { setSubmitting, resetForm }) => {
     // Use Netlify's form submissions endpoint
