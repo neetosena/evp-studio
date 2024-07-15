@@ -62,13 +62,20 @@ const Wrapper = styled.footer`
     margin: 0 auto;
   }
 
-  .container-footer a:hover {
+  .inner-footer a:hover,
+  inner-details a:hover,
+  inner-footer-items a:hover {
     opacity: 0.5;
   }
 
   .container-logo {
-    display: block;
+    display: inline-block;
     padding-bottom: 1em;
+  }
+
+  .container-logo:hover,
+  .container-logo:focus {
+    opacity: 0.5;
   }
 
   .inner-footer {

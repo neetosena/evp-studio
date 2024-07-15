@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import ThankYou from "./ThankYou";
 
 const ContactForm = () => {
-  const navigate = useNavigate();
+  const [submitted, setSubmitted] = useState(false);
 
   const initialValues = {
     name: "",
@@ -37,7 +38,10 @@ const ContactForm = () => {
         console.log("Form sucessfully submitted");
         resetForm();
         setSubmitting(false);
-        navigate("/thank-you");
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 5000);
+
+        // navigate("/thank-you");
         // alert("Thank you for your message!");
       })
       .catch((error) => {
@@ -55,65 +59,75 @@ const ContactForm = () => {
 
   return (
     <Wrapper>
+      {submitted && (
+        <div className="container-Thank-you-message">
+          <ThankYou />
+        </div>
+      )}
+
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <input type="hidden" name="bot-field" />
-          <div>
-            <Field
-              className="input-field"
-              id="name"
-              name="name"
-              placeholder="Name"
-              type="text"
-            />
-            <ErrorMessage
-              className="error-message error-message-name"
-              name="name"
-              component="div"
-            />
-          </div>
+        {({ isSubmitting }) => (
+          <Form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" name="bot-field" />
+            <div>
+              <Field
+                className="input-field"
+                id="name"
+                name="name"
+                placeholder="Name"
+                type="text"
+              />
+              <ErrorMessage
+                className="error-message error-message-name"
+                name="name"
+                component="div"
+              />
+            </div>
 
-          <div>
-            <Field
-              className="input-field"
-              id="email"
-              name="email"
-              placeholder="Email"
-              type="email"
-            />
-            <ErrorMessage
-              className="error-message error-message-email"
-              name="email"
-              component="div"
-            />
-          </div>
-          <div>
-            <Field
-              className="input-field"
-              id="message"
-              name="message"
-              placeholder="Message"
-              as="textarea"
-            />
-            <ErrorMessage
-              className="error-message error-message-message"
-              name="message"
-              component="div"
-            />
-          </div>
+            <div>
+              <Field
+                className="input-field"
+                id="email"
+                name="email"
+                placeholder="Email"
+                type="email"
+              />
+              <ErrorMessage
+                className="error-message error-message-email"
+                name="email"
+                component="div"
+              />
+            </div>
+            <div>
+              <Field
+                className="input-field"
+                id="message"
+                name="message"
+                placeholder="Message"
+                as="textarea"
+              />
+              <ErrorMessage
+                className="error-message error-message-message"
+                name="message"
+                component="div"
+              />
+            </div>
 
-          <button type="submit">Send</button>
-        </Form>
+            <button type="submit" disable={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Send"}
+            </button>
+          </Form>
+        )}
       </Formik>
     </Wrapper>
   );
@@ -124,6 +138,14 @@ export default ContactForm;
 const Wrapper = styled.div`
   div {
     position: relative;
+  }
+
+  //colour the background of the ThankYou component
+  .container-Thank-you-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
   }
 
   input,
