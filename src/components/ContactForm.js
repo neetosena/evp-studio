@@ -27,6 +27,7 @@ const ContactForm = () => {
       )
       .join("&");
   };
+
   const onSubmit = (values, { setSubmitting, resetForm }) => {
     // Use Netlify's form submissions endpoint
     fetch("/", {
@@ -56,6 +57,10 @@ const ContactForm = () => {
     email: Yup.string().email("Invalid email format!").required("Required"),
     message: Yup.string().required("Required"),
   });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [submitted]);
 
   return (
     <Wrapper>
