@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -28,7 +29,9 @@ const Error = () => {
             The page you are looking for might have been removed had its name
             changed or is temporarily unavailable.
           </p>
-          <button type="button">Home</button>
+          <Link className="home-link" to="/">
+            Home
+          </Link>
         </div>
       </div>
 
@@ -86,22 +89,21 @@ const Wrapper = styled.div`
     padding: 0.5em 0;
   }
 
-  button {
+  .home-link {
     display: block;
-    width: 100%;
-    outline: none;
+    padding: 1em 6em;
+    text-align: center;
+
     background: var(--lightGray);
-    height: 4em;
+
     color: white;
     font-weight: 600;
     cursor: pointer;
-    outline: none;
-    border: none;
     transition: all ease-in-out 0.3s;
   }
 
-  button:focus,
-  button:hover {
+  .home-link:focus,
+  .home-link:hover {
     background: var(--darkGray);
   }
 
@@ -178,7 +180,7 @@ const Wrapper = styled.div`
       max-width: 600px;
     }
 
-    button {
+    .home-link {
       align-self: center;
       max-width: 300px;
     }
