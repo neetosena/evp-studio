@@ -25,7 +25,10 @@ const Error = () => {
           <span>Oops!</span>
           <span className="code">404</span>
           <span>Page Not Found!</span>
-          <p>The page you were looking for doesn't exist.</p>
+          <p>
+            The page you were looking for doesn't exist. You may have misstyped
+            the address or the page may have moved.
+          </p>
           <Link className="home-link" to="/">
             Home
           </Link>
