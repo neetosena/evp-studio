@@ -98,14 +98,14 @@ const Wrapper = styled.section`
     padding-bottom: 7em;
   }
 
+  .about-container p {
+    color: var(--lightGray);
+  }
+
   .about-container,
   .testimonials-container {
     margin: 0 auto;
     max-width: 800px;
-  }
-
-  .testimonials-container {
-    /* border: 1px solid magenta; */
   }
 
   .testimonials-inner-container img {
@@ -115,6 +115,10 @@ const Wrapper = styled.section`
 
   .testimonials-inner-container .name {
     font-weight: 900;
+    color: var(--lightGray);
+  }
+
+  .testimonials-inner-container div {
     color: var(--lightGray);
   }
 

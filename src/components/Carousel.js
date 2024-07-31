@@ -23,14 +23,12 @@ const Carousel = ({ images, onIndexChange, handleClick }) => {
     <Wrapper>
       <div className="container-img">
         {images.map((image, i) => {
-          const { name, img } = image;
-
           return (
             <img
               className={index === i ? "active-image" : "previous-image"}
               key={i}
-              src={img}
-              alt={name}
+              src={image}
+              alt={i}
               onClick={() => handleClick(index)}
             />
           );

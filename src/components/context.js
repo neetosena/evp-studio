@@ -1,9 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import client from "./contentfulClient";
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [index, setIndex] = useState(0);
+  const [article, setArticle] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (article.length === 0) {
+      client
+        .getEntries({ content_type: "post" })
+        .then((resp) => {
+          setArticle(resp.items);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setError(err);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+    }
+  }, [article]);
 
   const scrollToSection = (location) => {
     let hash = location.hash ? location.hash.slice(1) : null;
@@ -17,7 +39,19 @@ const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ scrollToSection, index, setIndex }}>
+    <AppContext.Provider
+      value={{
+        scrollToSection,
+        index,
+        setIndex,
+        article,
+        setArticle,
+        isLoading,
+        setIsLoading,
+        error,
+        setError,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

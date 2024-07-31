@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Carousel from "../components/Carousel";
 import SlideShow from "../components/SlideShow";
 
-import { testCarousel, testCarousel2 } from "../utils/gallery";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
@@ -10,23 +9,22 @@ import BackgroundLogo from "../images/logo_background.svg";
 import { useGlobalContext } from "../components/context";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { slugConversion } from "../utils/slugConversion";
 
 const ProjectPost = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showSlide, setShowSlide] = useState({
-    carousel: false,
-    carousel2: false,
-  });
-
-  const { scrollToSection } = useGlobalContext();
+  const { article, scrollToSection } = useGlobalContext();
   const location = useLocation();
 
-  const handleClick = (i, slideShowKey) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndexArticle, setCurrentIndexArticle] = useState(0);
+  const [showSlide, setShowSlide] = useState({});
+
+  const handleClick = (i, slideShowKey, index) => {
     setCurrentIndex(i);
-    setShowSlide((prevState) => ({ ...prevState, [slideShowKey]: true }));
+    setShowSlide({ [slideShowKey]: true });
+    setCurrentIndexArticle(index);
   };
 
-  console.log(currentIndex);
   useEffect(() => {
     scrollToSection(location);
   }, [location, scrollToSection]);
@@ -36,16 +34,18 @@ const ProjectPost = () => {
       <Navbar colorScheme="gray" />
       <div className="inner-container">
         <div className="sidebar">
-          <Sidebar
-            name="Dundrum House"
-            date="April 2023"
-            url="#dundrum-house"
-          />
-          <Sidebar
-            name="Killakee House"
-            date="May 2022"
-            url="#killakee-house"
-          />
+          {article.length > 0 &&
+            article.map((item) => {
+              const { fields, sys } = item;
+              return (
+                <Sidebar
+                  key={sys.id}
+                  name={fields.title}
+                  date={fields.date}
+                  url={`#${slugConversion(fields.title)}`}
+                />
+              );
+            })}
         </div>
         <img
           className="background-logo"
@@ -54,116 +54,49 @@ const ProjectPost = () => {
         />
 
         <div className="wrapper-project">
-          <div id="dundrum-house" className="project-container">
-            <Carousel
-              images={testCarousel}
-              handleClick={(i) => handleClick(i, "carousel")}
-            />
-
-            <span className="project-title">Dundrum House</span>
-            <p>
-              This home is located in close proximity to a quiet local park and
-              enjoys views of the woodland and mature trees from the front. The
-              existing house required significant modifications and expansion to
-              deliver on the client brief for a contemporary family home. In
-              addition to the functional requirements, light, connectivity to
-              the outdoors and adaptability were key design considerations.
-            </p>
-            <p>
-              The hall creates a direct axis through the house, widening to
-              bring as much light as possible to the centre of the plan and
-              provide visual links to the front and rear gardens. Ceiling
-              heights have been raised to allow tall windows bringing
-              surrounding tree foliage into view.
-            </p>
-            <p>
-              Internally the plan is designed to be as open and free flowing as
-              possible with full height glazed doors and screens to the hallway;
-              the primary spaces formed in a soft white finish and a single
-              floor material throughout. A wall and stairs of oak slats
-              organises movement; anchors the composition and with the fitted
-              oak furniture brings a natural warmth to the space.
-            </p>
-            <p>
-              The other rooms in the home are finished with oak flooring or
-              tiles and painted to suit the function and orientation while
-              storage spaces are discreetly located within walls.
-            </p>
-            <p>
-              Externally the massing of the building respects the streetscape
-              and is modelled to optimise natural light in home and garden. A
-              soft white render and red brick bedded in a light mortar form the
-              basic pallet. A natural tone is introduced at ground level to the
-              front enhancing the entrance way.
-            </p>
-          </div>
-          <div id="killakee-house" className="project-container project-2">
-            <Carousel
-              images={testCarousel2}
-              handleClick={(i) => handleClick(i, "carousel2")}
-            />
-
-            <span className="project-title">Killakee House</span>
-            <p>
-              This home is located at the foothills of the Dublin mountains. The
-              original house provides a calm interior with a simple pallet of
-              finishes and collection of furniture and artwork. The client brief
-              was to create a brighter, larger kitchen & dining area, better
-              connected to the surrounding garden and scenery.
-            </p>
-            <p>
-              Initial modelling explored the contrasting concepts of openness
-              and shelter. The resulting built form wraps the internal space
-              while providing connectivity to the outdoor seating and planting
-              areas. The composition of openings frame key views and deliver a
-              panoramic aspect, while maintaining a comfortable environment.
-            </p>
-            <p>
-              Internally the plan is designed to be as open as possible while
-              providing a little separation between the functional area of the
-              kitchen. Finishes are simple and run through seamlessly from the
-              existing house. The external form is simple and designed to allow
-              views over the extension to the landscape beyond and keep the
-              integrity of the original gable end.
-            </p>
-            <p>
-              Externally a simple timber pergola and a planting deck address the
-              main openings, and provide structures for planting at the
-              interface with the surrounding landscape.
-            </p>
-          </div>
+          {article.length > 0 &&
+            article.map((item, index) => {
+              const { fields, sys } = item;
+              return (
+                <div
+                  key={sys.id}
+                  id={`${slugConversion(fields.title)}`}
+                  className="project-container"
+                >
+                  <Carousel
+                    images={fields.images.map(
+                      (img) => img.fields.file.url + "?q=20"
+                    )}
+                    handleClick={(i) => handleClick(i, sys.id, index)}
+                  />
+                  <span className="project-title">{fields.title}</span>
+                  {fields.paragraph.content.map((paragraph, i) => {
+                    const { content } = paragraph;
+                    return <p key={i}>{content[0].value}</p>;
+                  })}
+                </div>
+              );
+            })}
+          {Object.keys(showSlide).length > 0 &&
+          showSlide[Object.keys(showSlide)] === true ? (
+            <div className="slideshow">
+              <SlideShow
+                image={
+                  article[currentIndexArticle].fields.images[currentIndex]
+                    .fields.file.url
+                }
+                title={article[currentIndexArticle].fields.title}
+                date={article[currentIndexArticle].fields.date}
+                setShowSlide={setShowSlide}
+                index={currentIndex}
+                setIndex={setCurrentIndex}
+                totalImages={article[currentIndexArticle].fields.images.length}
+                slideShowKey={Object.keys(showSlide)}
+              />
+            </div>
+          ) : null}
         </div>
       </div>
-      {showSlide.carousel2 && (
-        <div className="slideshow">
-          <SlideShow
-            image={testCarousel2[currentIndex].img}
-            title="Killakee House"
-            date="May 2022"
-            setShowSlide={setShowSlide}
-            showSlide={showSlide.carousel2}
-            index={currentIndex}
-            setIndex={setCurrentIndex}
-            totalImages={testCarousel2.length}
-            slideShowKey="carousel2"
-          />
-        </div>
-      )}
-      {showSlide.carousel && (
-        <div className="slideshow">
-          <SlideShow
-            image={testCarousel[currentIndex].img}
-            title="Dundrum House"
-            date="April 2023"
-            setShowSlide={setShowSlide}
-            showSlide={showSlide.carousel}
-            index={currentIndex}
-            setIndex={setCurrentIndex}
-            totalImages={testCarousel.length}
-            slideShowKey="carousel"
-          />
-        </div>
-      )}
 
       <Footer />
     </Wrapper>
@@ -179,20 +112,24 @@ const Wrapper = styled.div`
     scroll-margin-top: 10em;
   }
 
+  .project-container p {
+    color: var(--lightGray);
+  }
+
   .sidebar {
     display: none;
   }
 
   //I have to figure out this one when I use the contentful API
-  .project-2 {
+  .project-container:nth-child(even) {
     position: relative;
     padding-bottom: 2em;
   }
 
-  .project-2::after {
+  .project-container:nth-child(even)::after {
     content: "";
     position: absolute;
-    top: -6em;
+    top: -2em;
     left: 0;
     width: 100%;
     height: calc(7em + 100%);

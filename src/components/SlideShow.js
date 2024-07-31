@@ -21,9 +21,7 @@ const SlideShow = ({
   };
 
   const haldleClose = () => {
-    setShowSlide((prevState) => {
-      return { ...prevState, [slideShowKey]: false };
-    });
+    setShowSlide({ [slideShowKey]: false });
   };
 
   return (
