@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import client from "./contentfulClient";
+import client from "./ContentfulClient";
 
 const AppContext = React.createContext();
 
