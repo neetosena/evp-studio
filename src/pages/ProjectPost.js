@@ -10,6 +10,7 @@ import { useGlobalContext } from "../components/context";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { slugConversion } from "../utils/slugConversion";
+import { dateConversion } from "../utils/dateConversion";
 
 const ProjectPost = () => {
   const { article, scrollToSection } = useGlobalContext();
@@ -41,7 +42,7 @@ const ProjectPost = () => {
                 <Sidebar
                   key={sys.id}
                   name={fields.title}
-                  date={fields.date}
+                  date={dateConversion(fields.date)}
                   url={`#${slugConversion(fields.title)}`}
                 />
               );
@@ -86,7 +87,7 @@ const ProjectPost = () => {
                     .fields.file.url
                 }
                 title={article[currentIndexArticle].fields.title}
-                date={article[currentIndexArticle].fields.date}
+                date={dateConversion(article[currentIndexArticle].fields.date)}
                 setShowSlide={setShowSlide}
                 index={currentIndex}
                 setIndex={setCurrentIndex}

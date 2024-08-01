@@ -2,13 +2,13 @@ import styled from "styled-components";
 import Title from "../components/Title";
 import Navbar from "../components/Navbar";
 import ProjectCard from "../components/ProjectsCard";
-import Image1 from "../images/130-Sandyford-Road_DSC1692-1.jpg";
-import Image2 from "../images/Aragon-Killakee_DSC9413_Panorama 2-about.jpg";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import { slugConversion } from "../utils/slugConversion";
 import { useGlobalContext } from "../components/context";
 import { useEffect } from "react";
+import Loading from "../components/Loading";
+import { dateConversion } from "../utils/dateConversion";
 
 const Projects = () => {
   const { article, setArticle, isLoading, setIsLoading, error, setError } =
@@ -28,7 +28,7 @@ const Projects = () => {
       <div className="project-container">
         {error && <p>Something went wrong...</p>}
         {isLoading && !article.length > 0 ? (
-          <p>Loading...</p>
+          <Loading />
         ) : (
           article.map((item) => {
             const { fields, sys } = item;
@@ -39,9 +39,9 @@ const Projects = () => {
                 to={`/projects/project-post#${slugConversion(fields.title)}`}
               >
                 <ProjectCard
-                  image={fields.images[0].fields.file.url + "?q=20"}
+                  image={fields.images[0].fields.file.url + "?q=15"}
                   title={fields.title}
-                  date={fields.date}
+                  date={dateConversion(fields.date)}
                   description={fields.paragraph.content[0].content[0].value}
                 />
               </Link>
