@@ -5,6 +5,7 @@ import SlideShow from "../components/SlideShow";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
+import ArrowBackTop from "../components/ArrowBackTop";
 import BackgroundLogo from "../images/logo_background.svg";
 import { useGlobalContext } from "../components/context";
 import { useLocation } from "react-router-dom";
@@ -98,6 +99,7 @@ const ProjectPost = () => {
           ) : null}
         </div>
       </div>
+      <ArrowBackTop />
 
       <Footer />
     </Wrapper>
