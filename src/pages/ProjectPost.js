@@ -67,12 +67,11 @@ const ProjectPost = () => {
                 >
                   <Carousel
                     images={fields.images.map(
-                      (img) => img.fields.file.url + "?q=20",
+                      (img) => img.fields.file.url + "?q=20"
                     )}
                     handleClick={(i) => handleClick(i, sys.id, index)}
                   />
                   <span className="project-title">{fields.title}</span>
-                  {fields?.test && <strong>{fields.test}</strong>}
                   {fields.paragraph.content.map((paragraph, i) => {
                     const { content } = paragraph;
                     return <p key={i}>{content[0].value}</p>;
