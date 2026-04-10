@@ -9,13 +9,60 @@ const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const space = process.env.REACT_APP_SPACE;
+  const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
+  const environment = process.env.REACT_APP_ENVIRONMENT;
+  const query = `
+    query {
+    assetCursorCollection{
+  items {
+    contentType
+    description
+    fileName
+    height
+    size
+    title
+    url
+    width
+  }
+}
+  }
+  
+  `;
+
+  const fetchData = async () => {
+    try {
+      const resp = await fetch(
+        `https://graphql.contentful.com/content/v1/spaces/${space}/environments/${environment}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({ query }),
+        },
+      );
+      if (!resp.ok) {
+        throw new Error(`Failed to access ${resp.status}`);
+      } else {
+        const json = await resp.json();
+        console.log(json);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
+    fetchData();
     if (article.length === 0) {
       client
         .getEntries({ content_type: "post" })
         .then((resp) => {
           setArticle(resp.items);
           setIsLoading(false);
+          console.log("testing", resp.items);
         })
         .catch((err) => {
           console.error(err);
